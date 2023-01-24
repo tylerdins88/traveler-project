@@ -1,11 +1,11 @@
-
+fetchBtn = $("#fetchBtn");
 
 function findHotel(event) {
     event.preventDefault();
 
     var hotelLoc = $("#hotelLoc").val();
 
-    var hotelAPI = "ENTER THE API HERE"
+    var hotelAPI = "ENTER API LINK HERE"
 
     fetch(hotelAPI)
         .then(function (response) {
