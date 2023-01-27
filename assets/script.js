@@ -1,6 +1,12 @@
 fetchBtn = $("#fetchBtn");
+
+//creates event listener on fetch button
 fetchBtn.on("click", handleSubmit);
 
+var breweryInfo = $("#brewerySlot")
+var hotelInfo = $("#hotelSlot")
+
+//creates function to retrieve data after clicking button
 function handleSubmit(event) {
     event.preventDefault();
 
@@ -17,6 +23,7 @@ function handleSubmit(event) {
         }
     }
 
+    //fetches data from brewery API
     fetch(breweryAPI, options1)
 
         .then(function (response) {
@@ -29,6 +36,15 @@ function handleSubmit(event) {
             var breweryName = data[0].name 
             var breweryAddress = data[0].address
             console.log(breweryName, breweryAddress)
+            
+            //renders brewery info on website
+            var breweryDiv1 = $("<div>")
+            breweryInfo.append(breweryDiv1)
+            breweryDiv1.text("Brewery Name: " + breweryName)
+
+            var breweryDiv2 = $("<div>")
+            breweryInfo.append(breweryDiv2)
+            breweryDiv2.text("Brewery Addres: " + breweryAddress)
 
             var lon = data[0].longitude
             console.log(lon)
@@ -45,6 +61,8 @@ function handleSubmit(event) {
                     'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
                 }
             }
+
+            //fetches data from hotel API
             fetch(hotelAPI, options)
                 .then(function (response) {
                     return response.json();
@@ -57,7 +75,14 @@ function handleSubmit(event) {
                     var hotelAddress = data.result[0].address
                     console.log(hotelName, hotelAddress)
 
-                    
+                    //renders hotel info onto website
+                    var hotelDiv1 = $("<div>")
+                    hotelInfo.append(hotelDiv1)
+                    hotelDiv1.text("Hotel Name: " + hotelName)
+
+                    var hotelDiv2 = $("<div>")
+                    hotelInfo.append(hotelDiv2)
+                    hotelDiv2.text("Hotel Address: " + hotelAddress)
                 })
 
         })
