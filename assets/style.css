@@ -1,0 +1,20 @@
+#body{
+    background-image:url(./img1.jpeg);
+    
+}
+.searchText{
+    font-family: silkscreen-Bold;
+}
+
+.searchBrewery{
+    font-family: silkscreen-Bold;
+    margin-top: 50px;
+    text-decoration: underline;
+    
+}
+
+.labelStyle{
+    font-family: silkscreen-Bold;
+    margin-top: 150px;
+}
+
