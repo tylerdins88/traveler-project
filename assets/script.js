@@ -9,7 +9,7 @@ var hotelInfo = $("#hotelSlot")
 //creates function to retrieve data after clicking button
 function handleSubmit(event) {
     event.preventDefault();
-
+   
     var breweryLoc = $("#breweryLoc").val();
     console.log("message", breweryLoc)
     var breweryKey = '2b148a14a3msh12fa6ec54fe1b3fp1ed456jsnbd039561a19d'
@@ -70,9 +70,29 @@ function handleSubmit(event) {
                 .then(function (data) {
                     console.log(data);
                     hotelData = data;
-                
-                    var hotelName = data.result[0].hotel_name
-                    var hotelAddress = data.result[0].address
+
+                    console.log(data.result[0].distance);
+                    
+                    
+                    //limits the distance between the hotel and the brewery 
+
+                    var k = 0;
+            
+                    for (i=0;i<data.result.length;i++){
+                        var distanceHotel = data.result[i].distance;
+                        if (Number(distanceHotel) <= 1){
+                            k = i;
+                            console.log(k);
+                            break;
+                            
+                        }
+                    }
+
+
+                    var hotelName = data.result[k].hotel_name;
+                    var hotelAddress = data.result[k].address;
+                   
+
                     console.log(hotelName, hotelAddress)
 
                     //renders hotel info onto website
@@ -83,7 +103,12 @@ function handleSubmit(event) {
                     var hotelDiv2 = $("<div>")
                     hotelInfo.append(hotelDiv2)
                     hotelDiv2.text("Hotel Address: " + hotelAddress)
+
+                    
+                    
                 })
+
+                
 
         })
 
