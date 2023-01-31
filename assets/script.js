@@ -33,10 +33,11 @@ function handleSubmit(event) {
             console.log(data);
             breweryData = data;
 
-            var breweryName = data[0].name 
+            var breweryName = data[0].name
             var breweryAddress = data[0].address
+            var breweryWebsite = data[0].website_url
             console.log(breweryName, breweryAddress)
-            
+
             //renders brewery info on website
             var breweryDiv1 = $("<div>")
             breweryInfo.append(breweryDiv1)
@@ -45,6 +46,13 @@ function handleSubmit(event) {
             var breweryDiv2 = $("<div>")
             breweryInfo.append(breweryDiv2)
             breweryDiv2.text("Brewery Addres: " + breweryAddress)
+
+            var breweryDiv3 = $("<a>")
+            breweryInfo.append(breweryDiv3)
+            breweryDiv3.attr("href", breweryWebsite)
+            breweryDiv3.attr("target", "_blank")
+            breweryDiv3.text("Brewery Website")
+            console.log(breweryWebsite)
 
             var lon = data[0].longitude
             console.log(lon)
@@ -70,9 +78,29 @@ function handleSubmit(event) {
                 .then(function (data) {
                     console.log(data);
                     hotelData = data;
-                
-                    var hotelName = data.result[0].hotel_name
-                    var hotelAddress = data.result[0].address
+
+                    console.log(data.result[0].distance);
+
+
+                    //limits the distance between the hotel and the brewery 
+
+                    var k = 0;
+
+                    for (i = 0; i < data.result.length; i++) {
+                        var distanceHotel = data.result[i].distance;
+                        if (Number(distanceHotel) <= 1) {
+                            k = i;
+                            console.log(k);
+                            break;
+
+                        }
+                    }
+
+
+                    var hotelName = data.result[k].hotel_name;
+                    var hotelAddress = data.result[k].address;
+
+
                     console.log(hotelName, hotelAddress)
 
                     //renders hotel info onto website
@@ -83,7 +111,12 @@ function handleSubmit(event) {
                     var hotelDiv2 = $("<div>")
                     hotelInfo.append(hotelDiv2)
                     hotelDiv2.text("Hotel Address: " + hotelAddress)
+
+
+
                 })
+
+
 
         })
 
