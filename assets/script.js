@@ -19,7 +19,6 @@ function handleSubmit(event) {
     var breweryLoc = $("#breweryLoc").val();
     console.log("message", breweryLoc)
     retrieveDataZip(breweryLoc);
-    createList();
 }
 
 function retrieveDataZip(breweryLoc) {
@@ -52,6 +51,7 @@ function retrieveDataZip(breweryLoc) {
             if (storedLocations.includes(breweryLoc)) {
                 return;
             } else {
+                createList();
                 storedLocations.push(breweryLoc)
                 localStorage.setItem("locationWanted", JSON.stringify(storedLocations))
             }
