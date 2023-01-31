@@ -7,8 +7,10 @@ var breweryInfo = $("#brewerySlot")
 var hotelInfo = $("#hotelSlot")
 var prevLoc = $("#prevLoc")
 var breweryData;
+var hotelData;
 var lat;
 var lon;
+var storedLocations = JSON.parse(localStorage.getItem("locationWanted")) || [];
 
 //creates function to retrieve data after clicking button
 function handleSubmit(event) {
@@ -16,7 +18,10 @@ function handleSubmit(event) {
 
     var breweryLoc = $("#breweryLoc").val();
     console.log("message", breweryLoc)
+    retrieveDataZip(breweryLoc);
+}
 
+function retrieveDataZip(breweryLoc) {
     var breweryAPI = "https://breweries.p.rapidapi.com/search.php?name=brew&postal=" + breweryLoc
     var options1 = {
         method: 'GET',
@@ -42,71 +47,11 @@ function handleSubmit(event) {
             console.log(lat)
 
             updateBrewery();
-
-            var hotelAPI = "https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates?longitude=" + lon + "&filter_by_currency=USD&room_number=1&locale=en-us&latitude=" + lat + "&order_by=popularity&units=imperial&checkin_date=2023-07-15&adults_number=2&checkout_date=2023-07-16&page_number=0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&children_number=2&include_adjacency=true&children_ages=5%2C0"
-
-            var options = {
-                method: 'GET',
-                headers: {
-                    'X-RapidAPI-Key': '0c79cccc48mshc9a18d77fd1168bp1de8d6jsncab9da17bdfa',
-                    'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
-                }
-            }
-
-            //fetches data from hotel API
-            fetch(hotelAPI, options)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    console.log(data);
-                    hotelData = data;
-
-                    console.log(data.result[0].distance);
-
-
-                    //limits the distance between the hotel and the brewery 
-
-                    var k = 0;
-
-                    for (i = 0; i < data.result.length; i++) {
-                        var distanceHotel = data.result[i].distance;
-                        if (Number(distanceHotel) <= 1) {
-                            k = i;
-                            console.log(k);
-                            break;
-
-                        }
-                    }
-
-                    hotelInfo.empty();
-
-
-                    var hotelName = data.result[k].hotel_name;
-                    var hotelAddress = data.result[k].address;
-                    var hotelURL = data.result[k].url
-                    console.log(hotelName, hotelAddress, hotelURL)
-
-                    //renders hotel info onto website
-                    var hotelDiv1 = $("<div>")
-                    hotelInfo.append(hotelDiv1)
-                    hotelDiv1.text("Hotel Name: " + hotelName)
-
-                    var hotelDiv2 = $("<div>")
-                    hotelInfo.append(hotelDiv2)
-                    hotelDiv2.text("Hotel Address: " + hotelAddress)
-
-                    var hotelDiv3 = $("<a>")
-                    hotelInfo.append(hotelDiv3)
-                    hotelDiv3.attr("href", hotelURL)
-                    hotelDiv3.attr("target", "_blank")
-                    hotelDiv3.text("Book a Room Here")
-
-                    createList();
-                })
-
-
-
+            updateHotel();
+            createList();
+            // localStorage.setItem(breweryLoc, JSON.stringify(breweryLoc));
+            storedLocations.push(breweryLoc)
+            localStorage.setItem("locationWanted", JSON.stringify(storedLocations))
         })
 
 }
@@ -135,19 +80,103 @@ function updateBrewery() {
     breweryDiv3.text("Brewery Website")
 }
 
+function updateHotel() {
+
+    var hotelAPI = "https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates?longitude=" + lon + "&filter_by_currency=USD&room_number=1&locale=en-us&latitude=" + lat + "&order_by=popularity&units=imperial&checkin_date=2023-07-15&adults_number=2&checkout_date=2023-07-16&page_number=0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&children_number=2&include_adjacency=true&children_ages=5%2C0"
+
+    var options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '0c79cccc48mshc9a18d77fd1168bp1de8d6jsncab9da17bdfa',
+            'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
+        }
+    }
+
+    //fetches data from hotel API
+    fetch(hotelAPI, options)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            hotelData = data;
+
+            console.log(hotelData.result[0].distance);
+
+            //limits the distance between the hotel and the brewery 
+
+            var k = 0;
+
+            for (i = 0; i < hotelData.result.length; i++) {
+                var distanceHotel = hotelData.result[i].distance;
+                if (Number(distanceHotel) <= 1) {
+                    k = i;
+                    console.log(k);
+                    break;
+
+                }
+            }
+
+            hotelInfo.empty();
+
+            var hotelName = hotelData.result[k].hotel_name;
+            var hotelAddress = hotelData.result[k].address;
+            var hotelURL = hotelData.result[k].url
+            console.log(hotelName, hotelAddress, hotelURL)
+
+            //renders hotel info onto website
+            var hotelDiv1 = $("<div>")
+            hotelInfo.append(hotelDiv1)
+            hotelDiv1.text("Hotel Name: " + hotelName)
+
+            var hotelDiv2 = $("<div>")
+            hotelInfo.append(hotelDiv2)
+            hotelDiv2.text("Hotel Address: " + hotelAddress)
+
+            var hotelDiv3 = $("<a>")
+            hotelInfo.append(hotelDiv3)
+            hotelDiv3.attr("href", hotelURL)
+            hotelDiv3.attr("target", "_blank")
+            hotelDiv3.text("Book a Room Here")
+
+        })
+}
+
+function renderPrevList() {
+    for (var i = 0; i < storedLocations.length; i++) {
+        var lastEntered = document.createElement("li");
+        var lastInfo = document.createElement("button");
+        var enteredLoc = storedLocations[i];
+        lastInfo.innerHTML = enteredLoc;
+
+        lastInfo.setAttribute("class", "listLoc")
+        lastInfo.addEventListener("click", grabStorage);
+        lastEntered.append(lastInfo)
+        prevLoc.append(lastEntered)
+    }
+}
+
 function createList() {
-    enteredLoc = $("#breweryLoc").val()
+    var enteredLoc = $("#breweryLoc").val()
 
     var lastEntered = document.createElement("li");
     var lastInfo = document.createElement("button");
     lastInfo.innerHTML = enteredLoc;
     lastInfo.setAttribute("class", "listLoc")
-    // lastInfo.addEventListener("click", grabStorage);
+    lastInfo.addEventListener("click", grabStorage);
     lastEntered.append(lastInfo)
     prevLoc.append(lastEntered)
 }
 
+function grabStorage(event) {
+    var keyWanted = event.target.textContent;
+    console.log(keyWanted)
+    retrieveDataZip(keyWanted);
+    // var storedBrewery = JSON.parse(localStorage.getItem(keyWanted));
+    // console.log(storedBrewery)
+}
 
+renderPrevList();
 // click on button to submit zip code//
 // pull address of hotel from data
 //display name and info of hotel 
