@@ -19,6 +19,7 @@ function handleSubmit(event) {
     var breweryLoc = $("#breweryLoc").val();
     console.log("message", breweryLoc)
     retrieveDataZip(breweryLoc);
+    createList();
 }
 
 function retrieveDataZip(breweryLoc) {
@@ -48,12 +49,13 @@ function retrieveDataZip(breweryLoc) {
 
             updateBrewery();
             updateHotel();
-            createList();
-            // localStorage.setItem(breweryLoc, JSON.stringify(breweryLoc));
-            storedLocations.push(breweryLoc)
-            localStorage.setItem("locationWanted", JSON.stringify(storedLocations))
+            if (storedLocations.includes(breweryLoc)) {
+                return;
+            } else {
+                storedLocations.push(breweryLoc)
+                localStorage.setItem("locationWanted", JSON.stringify(storedLocations))
+            }
         })
-
 }
 
 function updateBrewery() {
@@ -138,7 +140,6 @@ function updateHotel() {
             hotelDiv3.attr("href", hotelURL)
             hotelDiv3.attr("target", "_blank")
             hotelDiv3.text("Book a Room Here")
-
         })
 }
 
@@ -172,8 +173,6 @@ function grabStorage(event) {
     var keyWanted = event.target.textContent;
     console.log(keyWanted)
     retrieveDataZip(keyWanted);
-    // var storedBrewery = JSON.parse(localStorage.getItem(keyWanted));
-    // console.log(storedBrewery)
 }
 
 renderPrevList();
