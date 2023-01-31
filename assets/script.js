@@ -5,6 +5,7 @@ fetchBtn.on("click", handleSubmit);
 
 var breweryInfo = $("#brewerySlot")
 var hotelInfo = $("#hotelSlot")
+var prevLoc = $("#prevLoc")
 
 //creates function to retrieve data after clicking button
 function handleSubmit(event) {
@@ -32,6 +33,8 @@ function handleSubmit(event) {
         .then(function (data) {
             console.log(data);
             breweryData = data;
+
+            breweryInfo.empty();
 
             var breweryName = data[0].name
             var breweryAddress = data[0].address
@@ -95,6 +98,8 @@ function handleSubmit(event) {
                         }
                     }
 
+                    hotelInfo.empty();
+
 
                     var hotelName = data.result[k].hotel_name;
                     var hotelAddress = data.result[k].address;
@@ -116,6 +121,7 @@ function handleSubmit(event) {
                     hotelDiv3.attr("target", "_blank")
                     hotelDiv3.text("Book a Room Here")
 
+                    createList();
                 })
 
 
@@ -123,6 +129,23 @@ function handleSubmit(event) {
         })
 
 }
+
+function createList() {
+    enteredLoc = $("#breweryLoc").val()
+
+    var lastEntered = document.createElement("li");
+    var lastInfo = document.createElement("button");
+    lastInfo.innerHTML = enteredLoc;
+    lastInfo.setAttribute("class", "listLoc")
+    // lastInfo.addEventListener("click", grabStorage);
+    lastEntered.append(lastInfo)
+    prevLoc.append(lastEntered)
+}
+
+
+
+
+
 // BREWERY API
 
 // https://rapidapi.com/ExoWatts/api/breweries/
