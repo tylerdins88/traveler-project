@@ -36,7 +36,7 @@ function handleSubmit(event) {
             var breweryName = data[0].name
             var breweryAddress = data[0].address
             var breweryWebsite = data[0].website_url
-            console.log(breweryName, breweryAddress)
+            console.log(breweryName, breweryAddress, breweryWebsite)
 
             //renders brewery info on website
             var breweryDiv1 = $("<div>")
@@ -52,7 +52,6 @@ function handleSubmit(event) {
             breweryDiv3.attr("href", breweryWebsite)
             breweryDiv3.attr("target", "_blank")
             breweryDiv3.text("Brewery Website")
-            console.log(breweryWebsite)
 
             var lon = data[0].longitude
             console.log(lon)
@@ -99,9 +98,8 @@ function handleSubmit(event) {
 
                     var hotelName = data.result[k].hotel_name;
                     var hotelAddress = data.result[k].address;
-
-
-                    console.log(hotelName, hotelAddress)
+                    var hotelURL = data.result[k].url
+                    console.log(hotelName, hotelAddress, hotelURL)
 
                     //renders hotel info onto website
                     var hotelDiv1 = $("<div>")
@@ -112,7 +110,11 @@ function handleSubmit(event) {
                     hotelInfo.append(hotelDiv2)
                     hotelDiv2.text("Hotel Address: " + hotelAddress)
 
-
+                    var hotelDiv3 = $("<a>")
+                    hotelInfo.append(hotelDiv3)
+                    hotelDiv3.attr("href", hotelURL)
+                    hotelDiv3.attr("target", "_blank")
+                    hotelDiv3.text("Book a Room Here")
 
                 })
 
