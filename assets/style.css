@@ -8,13 +8,23 @@
 
 .searchBrewery{
     font-family: silkscreen-Bold;
-    margin-top: 50px;
+    margin-top: 20px;
     text-decoration: underline;
     
 }
 
 .labelStyle{
     font-family: silkscreen-Bold;
-    margin-top: 150px;
+    margin-top: 20px;
 }
 
+#brewerySlot{
+    border: 5px solid black;
+    font-size: x-large;
+}
+
+#hotelSlot{
+    border: 5px solid black;
+    margin-top: 20px;
+    font-size: x-large
+}
