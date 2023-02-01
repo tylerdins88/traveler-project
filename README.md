@@ -15,14 +15,14 @@ As a group we worked together to complete this project using 2 fetch calls to 2 
 Please checkout our website at the following link: 
 
 ## Techonlogies Used 
-During this project we used the following techologies below...
-index.html
-CSS
-README.md
-script.js
-Gitlab
-Github
-Foundation Framework
-Google Fonts
-Brewery API:https://rapidapi.com/ExoWatts/api/breweries
-Hotel API: https://rapidapi.com/tipsters/api/booking-com
+- During this project we used the following techologies below...
+- index.html
+- CSS
+- README.md
+- script.js
+- Gitlab
+- Github
+- Foundation Framework
+- Google Fonts
+- Brewery API:https://rapidapi.com/ExoWatts/api/breweries
+- Hotel API: https://rapidapi.com/tipsters/api/booking-com
