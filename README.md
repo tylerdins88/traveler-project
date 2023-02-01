@@ -1,5 +1,8 @@
 # Traveler Project
 
+![site](./assets/images/img2.jpeg)
+![site](./assets/images/img3.jpeg)
+
 ## User Story
 This is a interface used to help someone traveling. 
 As a User, I want to enter the zip code of my destination on a submit form and get the name and address of a brewery.
@@ -11,4 +14,15 @@ As a group we worked together to complete this project using 2 fetch calls to 2 
 ## Link
 Please checkout our website at the following link: 
 
-## Preview
+## Techonlogies Used 
+During this project we used the following techologies below...
+index.html
+CSS
+README.md
+script.js
+Gitlab
+Github
+Foundation Framework
+Google Fonts
+Brewery API:https://rapidapi.com/ExoWatts/api/breweries
+Hotel API: https://rapidapi.com/tipsters/api/booking-com
