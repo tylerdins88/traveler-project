@@ -5,6 +5,7 @@
 
 .searchText {
     font-family: silkscreen-Bold;
+    text-align: center;
 }
 
 .searchBrewery {
@@ -18,10 +19,17 @@
     font-family: silkscreen-Bold;
     margin-top: 20px;
     background-color: yellow;
+    border: 2px solid black;
+    border-radius: 15px;
     width: 420px;
     margin-left: auto;
     margin-right: auto;
 
+}
+
+#fetchBtn {
+    border: 2px solid black;
+    border-radius: 15px;
 }
 
 .form-control {
@@ -31,22 +39,39 @@
 }
 
 #brewerySlot {
-    border: 5px solid black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    border-radius: 15px;
     font-size: x-large;
-    background-color: white;
+    background-color: lavender;
+    width: 600px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #hotelSlot {
-    border: 5px solid black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    border-radius: 15px;
     margin-top: 20px;
+    width: 600px;
     font-size: x-large;
-    background-color: white;
+    background-color: lavender;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.listLoc {
+#prevLoc {
     list-style: none;
-    background-color: white;
-    border: 3px solid black;
+    text-align: center;
+}
+
+.listLoc {
+    background-color: lightsalmon;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
 }

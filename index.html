@@ -14,14 +14,12 @@
 </head>
 
 <header class="header">
-
     <h1 class="text-center searchText">Booze & Bed</h1>
 </header>
 
 <body id="body">
     <div class="grid-container">
-        <div class="grid-x grid-padding-x">
-        </div>
+        <div class="grid-x grid-padding-x"></div>
         <div>
             <h2 class="text-center searchBrewery">Find a Brewery & Hotel</h2>
             <form class="form2">
@@ -31,10 +29,9 @@
                         <input type="text" class="form-control" id="breweryLoc" placeholder="Zip Code:">
                     </div>
                     <div class="button-group align-center">
-                        <button type="submit" class=" button rounded bordered shadow success" id="fetchBtn">Fetch
-                            Brewery</button>
+                        <button type="submit" class=" button rounded bordered shadow success" id="fetchBtn">Find me a
+                            Brewery & Bed!</button>
                     </div>
-            </form>
             </form>
         </div>
     </div>
@@ -43,13 +40,11 @@
     <h1 class="text-center searchText"> Previous Searches:</h1>
     <div id="prevLoc"></div>
 
-
-    <div class="row">
-        <h1 class="text-center searchText"> Results:</h1>
-        <div class="cell small-6">
-            <h2 class="text-left searchText"> Brewery:</h2>
+    <div class="row" id="results">
+        <div>
+            <h2 class="searchText"> Here is a Brewery we found for you:</h2>
             <div id="brewerySlot"></div>
-            <h2 class="text-left searchText"> Hotel:</h2>
+            <h2 class="searchText"> This is the Hotel to go along with it:</h2>
             <div id="hotelSlot"></div>
         </div>
     </div>
@@ -57,6 +52,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="./assets/script.js"></script>
 </body>
-
 
 </html>
