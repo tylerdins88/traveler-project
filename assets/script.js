@@ -1,8 +1,8 @@
+// This access the fetch button on the html and gives it a event listener of a click. 
 fetchBtn = $("#fetchBtn");
-
-//creates event listener on fetch button
 fetchBtn.on("click", handleSubmit);
 
+// These are variables we use globablly throughout the appplication. 
 var breweryInfo = $("#brewerySlot")
 var hotelInfo = $("#hotelSlot")
 var prevLoc = $("#prevLoc")
@@ -12,7 +12,7 @@ var lat;
 var lon;
 var storedLocations = JSON.parse(localStorage.getItem("locationWanted")) || [];
 
-//creates function to retrieve data after clicking button
+// Creates function to retrieve data after clicking the fetch button
 function handleSubmit(event) {
     event.preventDefault();
 
@@ -21,6 +21,8 @@ function handleSubmit(event) {
     retrieveDataZip(breweryLoc);
 }
 
+
+// Once the fetch brewery button is clicked it will run this function next with the entered value. 
 function retrieveDataZip(breweryLoc) {
     var breweryAPI = "https://breweries.p.rapidapi.com/search.php?name=brew&postal=" + breweryLoc
     var options1 = {
@@ -31,7 +33,7 @@ function retrieveDataZip(breweryLoc) {
         }
     }
 
-    //fetches data from brewery API
+    // Fetches data from brewery API
     fetch(breweryAPI, options1)
 
         .then(function (response) {
@@ -46,6 +48,7 @@ function retrieveDataZip(breweryLoc) {
             lat = data[0].latitude
             console.log(lat)
 
+            // Lists the brewery and hotel if found
             updateBrewery();
             updateHotel();
             if (storedLocations.includes(breweryLoc)) {
@@ -58,6 +61,7 @@ function retrieveDataZip(breweryLoc) {
         })
 }
 
+// Function that lists the brewery information
 function updateBrewery() {
     breweryInfo.empty();
 
@@ -66,14 +70,13 @@ function updateBrewery() {
     var breweryWebsite = breweryData[0].website_url
     console.log(breweryName, breweryAddress, breweryWebsite)
 
-    //renders brewery info on website
     var breweryDiv1 = $("<div>")
     breweryInfo.append(breweryDiv1)
     breweryDiv1.text("Brewery Name: " + breweryName)
 
     var breweryDiv2 = $("<div>")
     breweryInfo.append(breweryDiv2)
-    breweryDiv2.text("Brewery Addres: " + breweryAddress)
+    breweryDiv2.text("Brewery Address: " + breweryAddress)
 
     var breweryDiv3 = $("<a>")
     breweryInfo.append(breweryDiv3)
@@ -82,10 +85,9 @@ function updateBrewery() {
     breweryDiv3.text("Brewery Website")
 }
 
+// Function that fetches the hotel data and lists it on the page
 function updateHotel() {
-
     var hotelAPI = "https://booking-com.p.rapidapi.com/v1/hotels/search-by-coordinates?longitude=" + lon + "&filter_by_currency=USD&room_number=1&locale=en-us&latitude=" + lat + "&order_by=popularity&units=imperial&checkin_date=2023-07-15&adults_number=2&checkout_date=2023-07-16&page_number=0&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&children_number=2&include_adjacency=true&children_ages=5%2C0"
-
     var options = {
         method: 'GET',
         headers: {
@@ -94,7 +96,7 @@ function updateHotel() {
         }
     }
 
-    //fetches data from hotel API
+    // Fetches data from hotel API here
     fetch(hotelAPI, options)
         .then(function (response) {
             return response.json();
@@ -105,8 +107,7 @@ function updateHotel() {
 
             console.log(hotelData.result[0].distance);
 
-            //limits the distance between the hotel and the brewery 
-
+            // Limits the distance between the hotel and the brewery 
             var k = 0;
 
             for (i = 0; i < hotelData.result.length; i++) {
@@ -126,7 +127,7 @@ function updateHotel() {
             var hotelURL = hotelData.result[k].url
             console.log(hotelName, hotelAddress, hotelURL)
 
-            //renders hotel info onto website
+            // Renders hotel info onto website
             var hotelDiv1 = $("<div>")
             hotelInfo.append(hotelDiv1)
             hotelDiv1.text("Hotel Name: " + hotelName)
@@ -143,13 +144,14 @@ function updateHotel() {
         })
 }
 
+// This renders previous searches on the page using Local Storage
 function renderPrevList() {
     for (var i = 0; i < storedLocations.length; i++) {
         var lastEntered = document.createElement("li");
         var lastInfo = document.createElement("button");
         var enteredLoc = storedLocations[i];
-        lastInfo.innerHTML = enteredLoc;
 
+        lastInfo.innerHTML = enteredLoc;
         lastInfo.setAttribute("class", "listLoc")
         lastInfo.addEventListener("click", grabStorage);
         lastEntered.append(lastInfo)
@@ -157,11 +159,12 @@ function renderPrevList() {
     }
 }
 
+// This creates the list buttons as the user searches various zip codes
 function createList() {
     var enteredLoc = $("#breweryLoc").val()
-
     var lastEntered = document.createElement("li");
     var lastInfo = document.createElement("button");
+
     lastInfo.innerHTML = enteredLoc;
     lastInfo.setAttribute("class", "listLoc")
     lastInfo.addEventListener("click", grabStorage);
@@ -169,10 +172,12 @@ function createList() {
     prevLoc.append(lastEntered)
 }
 
+// Here is where we get our Local Storage information to access the previous searches.
 function grabStorage(event) {
     var keyWanted = event.target.textContent;
     console.log(keyWanted)
     retrieveDataZip(keyWanted);
 }
 
+// Calls the renderPrevList function to display previous searches when page loads
 renderPrevList();
