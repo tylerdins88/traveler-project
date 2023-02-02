@@ -1,7 +1,8 @@
 # Traveler Project
 
-![site](./assets/images/img2.jpeg)
-![site](./assets/images/img3.jpeg)
+<img src = "Bed and Booze 1.png">
+<img src = "Bed and Booze 2.png">
+<img src = "Bed and Booze Code.png">
 
 ## User Story
 This is a interface used to help someone traveling. 
