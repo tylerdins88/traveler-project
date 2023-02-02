@@ -17,10 +17,9 @@ function handleSubmit(event) {
     event.preventDefault();
 
     var breweryLoc = $("#breweryLoc").val();
-    console.log("message", breweryLoc)
+    console.log(breweryLoc)
     retrieveDataZip(breweryLoc);
 }
-
 
 // Once the fetch brewery button is clicked it will run this function next with the entered value. 
 function retrieveDataZip(breweryLoc) {
@@ -64,6 +63,8 @@ function retrieveDataZip(breweryLoc) {
 // Function that lists the brewery information
 function updateBrewery() {
     breweryInfo.empty();
+    $("#breweryReply").text("Here is a Brewery we found for you:");
+    breweryInfo.attr("class", "brewHotelSlot")
 
     var breweryName = breweryData[0].name
     var breweryAddress = breweryData[0].address
@@ -121,6 +122,8 @@ function updateHotel() {
             }
 
             hotelInfo.empty();
+            $("#hotelReply").text("This is the Hotel to go along with it:")
+            hotelInfo.attr("class", "brewHotelSlot")
 
             var hotelName = hotelData.result[k].hotel_name;
             var hotelAddress = hotelData.result[k].address;
