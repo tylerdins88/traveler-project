@@ -13,7 +13,7 @@ As a User, I want the nearest hotel to that brewery to also load on the website.
 As a group we worked together to complete this project using 2 fetch calls to 2 different APIs. We used javascript to dynamically updated our HTML and used Foundation program to updated our CSS
 
 ## Link
-Please checkout our website at the following link: 
+Please checkout our website at the following link: https://tylerdins88.github.io/traveler-project/
 
 ## Techonlogies Used 
 - During this project we used the following techologies below...
