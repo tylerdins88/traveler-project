@@ -92,7 +92,7 @@ function updateHotel() {
     var options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '0c79cccc48mshc9a18d77fd1168bp1de8d6jsncab9da17bdfa',
+            'X-RapidAPI-Key': '48884d9553msh9d06ab927209955p1d2a59jsna31bd869c873',
             'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
         }
     }
