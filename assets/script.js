@@ -154,7 +154,7 @@ function renderPrevList() {
         var lastInfo = document.createElement("button");
         var enteredLoc = storedLocations[i];
 
-        lastInfo.innerHTML = enteredLoc;
+        lastInfo.innerHTML = enteredLoc + " this is " + breweryData[0].city;
         lastInfo.setAttribute("class", "listLoc")
         lastInfo.addEventListener("click", grabStorage);
         lastEntered.append(lastInfo)
@@ -168,7 +168,7 @@ function createList() {
     var lastEntered = document.createElement("li");
     var lastInfo = document.createElement("button");
 
-    lastInfo.innerHTML = enteredLoc;
+    lastInfo.innerHTML = enteredLoc + " this is " + breweryData[0].city;
     lastInfo.setAttribute("class", "listLoc")
     lastInfo.addEventListener("click", grabStorage);
     lastEntered.append(lastInfo)
