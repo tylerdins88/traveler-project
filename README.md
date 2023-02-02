@@ -1,8 +1,6 @@
 # Traveler Project
 
-<img src = "Bed and Booze 1.png">
-<img src = "Bed and Booze 2.png">
-<img src = "Bed and Booze Code.png">
+![Screenshot](./assets/images/Bed%20and%20Booze%201.png)
 
 ## User Story
 This is a interface used to help someone traveling. 
@@ -10,7 +8,14 @@ As a User, I want to enter the zip code of my destination on a submit form and g
 As a User, I want the nearest hotel to that brewery to also load on the website. 
 
 ## Description
-As a group we worked together to complete this project using 2 fetch calls to 2 different APIs. We used javascript to dynamically updated our HTML and used Foundation program to updated our CSS
+
+This application was built working together as a group of 4. We first discovered 2 different APIs to work cohesively. The first is a brewery api that finds us a brewery in a selected zip code. We then use the lat & lon of this brewery on a hotel booking api. The hotel api finds us the nearest hotel possible. The following image shows a returned search. 
+
+![Screenshot](./assets/images/Bed%20and%20Booze%202.png)
+
+We used JavaScript to dynamically update our HTML. This is shown in the following photo of code. It shows how we get the data from the api, then apply it in a stylized way to our page. We set attributes as well as appened it. Foundation is used in the HTML to help give our page a structure and assist our CSS in styling. 
+
+![Screenshot](./assets/images/Bed%20and%20Booze%20Code.png)
 
 ## Link
 Please checkout our website at the following link: https://tylerdins88.github.io/traveler-project/
